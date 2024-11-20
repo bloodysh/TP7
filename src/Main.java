@@ -18,7 +18,6 @@ public class Main {
         Arets arets6 = new Arets(315, lyon, marseille);
         Arets arets7 = new Arets(600, marseille, paris);
 
-
         lille.getAretes().add(arets1);
         lille.getAretes().add(arets2);
         reims.getAretes().add(arets2);
@@ -33,23 +32,23 @@ public class Main {
         marseille.getAretes().add(arets7);
         paris.getAretes().add(arets7);
 
-
         graphe.ajouterNoeud(lille);
         graphe.ajouterNoeud(paris);
         graphe.ajouterNoeud(reims);
         graphe.ajouterNoeud(lyon);
         graphe.ajouterNoeud(marseille);
 
-        Noeud noeudInitial = graphe.getNoeuds().get(0);
+        Noeud noeudInitial = lille;
+        Noeud destination = marseille;
 
-        graphe.calculerDistances(lille);
+        graphe.calculerDistances(noeudInitial);
 
         int[] distances = graphe.getDistances();
         for (int i = 0; i < distances.length; i++) {
-            System.out.println("Distance to " + graphe.getNoeuds().get(i).getNom()+" from " + noeudInitial + ": " + distances[i]);
+            System.out.println("Distance from " + noeudInitial.getNom() + " to " + graphe.getNoeuds().get(i).getNom() + ": " + distances[i]);
         }
 
-        int distance = graphe.shortestPath(lille, marseille);
-        System.out.println("Shortest path from " + lille + " to " + paris + ": " + distance);
+        ArrayList<Noeud> path = graphe.getShortestPath(destination);
+        System.out.println("Shortest path from " + noeudInitial.getNom() + " to " + destination.getNom() + ": " + path);
     }
 }
